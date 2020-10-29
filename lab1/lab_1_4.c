@@ -1,5 +1,5 @@
 //
-// Created by alex on 28.10.2020.
+// Created by alex on 29.10.2020.
 //
 
 #include <stdio.h>
@@ -13,10 +13,11 @@
 // filemode 256 - 0400
 // filemode 384 - 0600
 
+// SEEK_SET, SEEK_CUR, SEEK_END
+
 int main(int argc, char **argv)
 {
 	int		f;
-	int		l;
 	int		i;
 	char	buf[1024];
 
@@ -33,6 +34,18 @@ int main(int argc, char **argv)
 			perror("write");
 			printf("errno=%d\n", errno);
 		}
+		lseek(f, 20, SEEK_CUR);
+		i = write(f, "row5\nrow6\nrow7\nrow8\n", 20);
+		if (i < 0){
+			perror("write");
+			printf("errno=%d\n", errno);
+		}
+		lseek(f, 10, SEEK_SET);
+		i = write(f, "row9\nrow10\n", 11);
+		if (i < 0){
+			perror("write");
+			printf("errno=%d\n", errno);
+		}
 		close(f);
 	}
 	else{
@@ -41,26 +54,13 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-
-	f = open(argv[1], O_RDONLY); // попытается открыть на запись - будет ошибка
-	if (f >= 0)
-	{
-		l = read(f, buf, 20);
-		printf("l(read) = %d\n%s\n", l, buf);
-	}
-	else
-	{
-		perror("open");
-		printf("errno=%d\n", errno);
-	}
-	close(f);
-
 	f = open(argv[1], O_RDWR);
 	if (f >= 0)
 	{
-		l = read(f, buf, 20);
+		i = read(f, buf, 60);
 		printf("Файл %s открылся нормально\n", argv[1]);
-		printf("%s\n", buf);
+		printf("%s\n", buf); //считает всё до /0
+		write(1, buf, 60); //считает всё
 	}
 	else
 	{
