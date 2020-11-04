@@ -10,7 +10,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	int l;
 	char buf[4096];
 

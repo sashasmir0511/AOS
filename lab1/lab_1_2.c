@@ -22,10 +22,10 @@ int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s file filemode (256 = 0400)\n", argv[0]);
+		fprintf(stderr, "Usage: %s file filemode \n", argv[0]);
 		exit(1);
 	}
-	f = creat(argv[1], atoi(argv[2]));
+	f = creat(argv[1], strtol(argv[2], NULL, 8)); // (mode & ~umask).
 	if (f >= 0)
 	{
 		i = write(f, "row1\nrow2\nrow3\nrow4\n", 20);
