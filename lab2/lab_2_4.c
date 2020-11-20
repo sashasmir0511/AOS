@@ -18,7 +18,6 @@ int main(){
 	if (fork())
 	{
 		printf("I am father after fork. My pid=%d ppid=%d\n", getpid(), getppid());
-		printf("I am father. I go wait for son\n");
 		sleep(1);
 		exit(0);
 	}
@@ -26,7 +25,6 @@ int main(){
 		printf("I am son. My pid=%d ppid=%d\n", getpid(), getppid());
 		sleep(2);
 		printf("I am son. My pid=%d ppid=%d\n", getpid(), getppid());
-		printf("I am son. I exit with code 3\n");
-		exit(3);
+		exit(0);
 	}
 }

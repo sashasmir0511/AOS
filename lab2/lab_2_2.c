@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+/*
 int main(){
 	int		l;
 	char	buf[10];
@@ -20,18 +21,32 @@ int main(){
 	parent = 0;
 	child = 0;
 	i = 0;
-	while (i < 100)
-	{
-		sprintf(buf, ".tmp%d", getpid());
-		close(creat(buf, 0600));
-		l = fork();
-		if (unlink(buf) != -1)
-			if (l)
-				parent += 1;
-			else
-				child += 1;
+//	while (i < 100)
+//	{
+	sprintf(buf, ".tmp%d", getpid());
+	close(creat(buf, 0600));
+	l = fork();
+	if (unlink(buf) != -1)
+		if (l)
+			parent += 1;
+		else {
+			child += 1;
+		}
 		i++;
-	}
-	printf("parent = %d\nchild = %d\n", parent, child);
+//	}
+//	printf("parent = %d\nchild = %d\n", parent, child);
+	exit(0);
+}
+ */
+
+int main(){
+	int l;
+	char buf[10];
+
+	sprintf(buf, ".tmp%d", getpid());
+	close(creat(buf, 0600));
+	l = fork();
+	if (unlink(buf)!=-1)
+		write(1, l?"#":"*", 1);
 	exit(0);
 }

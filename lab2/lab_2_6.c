@@ -10,20 +10,17 @@
 #include <unistd.h>
 
 int main(){
-	int		p;
-	int		rc;
 
-	printf("I am father before fork. My pid=%d ppid=%d\n", getpid(), getppid());
-	printf("I am father. Syscall \"wait\" return %d\n", wait(&rc));
 	if (fork())
 	{
-		printf("I am father after fork. My pid=%d ppid=%d\n", getpid(), getppid());
-		printf("I am father. I go wait for son\n");
-		printf("I am father. My son with pid %d exit with code 0x%x\n", p, rc); // 0x(exit)(еслли по сигналу)
+		printf("I am father after fork. My pid=%d ppid=%d gpid=%d\n",
+			getpid(), getppid(), getpgrp());
+		pause();
 		exit(0);
 	}
 	else{
-		printf("I am son. My pid=%d ppid=%d\n", getpid(), getppid());
+		printf("I am son. My pid=%d ppid=%d  gpid=%d\n",
+			getpid(), getppid(), getpgrp());
 		pause();
 		exit(3);
 	}

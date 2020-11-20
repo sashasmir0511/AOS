@@ -18,10 +18,10 @@ int main(){
 		sleep(1);
 		printf("I am father. See zombie where.\n");
 		system ("ps");
-		exit(0);
+		exit(0);	
 	}
 	else{
-		printf("I am son. I exit with code 3\n");
+//		printf("I am son. I exit with code 3\n");
 		exit(3);
 	}
 }
