@@ -17,9 +17,9 @@ void chld_sigusr_hdl (int sig) {
 int main(int argc, char* argv[]) {
 	pid_t pid = fork();
 	if (pid == 0) {
-		int		res;
-		t_sig	sigalrm_new_action;
-		sigset_t sigset;
+		int			res;
+		t_sig		sigalrm_new_action;
+		sigset_t	sigset;
 
 		sigalrm_new_action.sa_handler = chld_sigusr_hdl;
 		sigemptyset(&sigalrm_new_action.sa_mask);
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 
 		sigemptyset(&sigset);
 //		sigprocmask(SIG_UNBLOCK, &sigset, NULL);
-//		sigaddset(&sigset, SIGUSR1);
+		sigaddset(&sigset, SIGUSR1);
 
 		printf("child: initial suspend\n");
 		sigsuspend(&sigset);

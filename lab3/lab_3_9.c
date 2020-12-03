@@ -63,7 +63,7 @@ int		main()
 	}
 	else
 	{
-//		signal(SIGALRM, foo);
+		signal(SIGALRM, foo);
 		alarm(2);
 		cycle(10);
 //		pause();

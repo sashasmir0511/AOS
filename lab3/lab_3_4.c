@@ -58,15 +58,15 @@ int		main()
 	{
 		printf("Father %d\n", getpid());
 		sleep(2);
-//		kill(pid, SIGKILL);
-//		kill(pid, SIGUSR1);
+		kill(pid, SIGKILL);
+//		kill(pid, SIGUSR2);
 		pid = wait(&status);
 		printf("Child process %d finished with status %d   0x%x\n", pid, status, status);
 	}
 	else
 	{
-		cycle(10);
-//		pause();
+//		cycle(10);
+		pause();
 		exit(9);
 	}
 	return (0);

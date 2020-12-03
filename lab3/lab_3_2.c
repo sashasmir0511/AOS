@@ -19,11 +19,12 @@ int		main()
 	printf("START:\n");
 	sig.sa_handler = foo;
 	sigemptyset(&sig.sa_mask);
-	sig.sa_flags = 0;
-//	sig.sa_flags = SA_RESETHAND;
+//	sig.sa_flags = 0;
+	sig.sa_flags = SA_RESETHAND;
 //	sig.sa_flags = SA_RESTART;
 
 	sigaction(SIGINT, &sig, NULL);
+
 	while(1);
 	return (0);
 }
