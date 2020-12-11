@@ -48,7 +48,7 @@ typedef struct	client
 
 typedef struct	server
 {
-	long	mtype; // 8 byte
+	long	mtype;
 	int 	mtype_client;
 	int 	client_id;
 	int		text;
