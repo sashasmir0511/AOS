@@ -55,11 +55,13 @@ void	interrupt(int sig)
 	exit(2);
 }
 
-void	work_client(int my_id, int server_id)
+void	work_client(int client_id, int server_id)
 {
 	int			i;
+	int			my_number;
 	t_server	*q_s;
 	t_client	*q_c;
+
 
 	i = 1;
 	q_s = (t_server*)malloc(sizeof(t_server));
@@ -67,17 +69,17 @@ void	work_client(int my_id, int server_id)
 	q_s->mtype = 1;
 	while (1)
 	{
-		q_s->mtype_client = i;
-		q_s->client_id = my_id;
+		q_s->mtype_client = client_id;
+		q_s->client_id = client_id;
 		q_s->text = 100 + i;
 
 		if (msgsnd(server_id, q_s, sizeof(t_server) - sizeof(long), 0) == -1)
-			error_exit(q_s, q_c, my_id);
+			error_exit(q_s, q_c, client_id);
 
-		if (msgrcv(my_id, q_c, sizeof(t_client) + MAX_CHAR, 0, 0) == -1)
-			error_exit(q_s, q_c, my_id);
+		if (msgrcv(client_id, q_c, sizeof(t_client) + MAX_CHAR, my_number, 0) == -1)
+			error_exit(q_s, q_c, client_id);
 
-		print_client_msg(q_c, my_id);
+		print_client_msg(q_c, client_id);
 		i++;
 	}
 	free(q_c);

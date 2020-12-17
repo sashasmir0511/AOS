@@ -65,7 +65,6 @@ int 	main(int argc, char **argv)
 	}
 	else
 	{
-
 		while(i++ < 10)
 		{
 			if (msgrcv(msgid, q_i, 50, q_i->mtype, 0) == -1)
